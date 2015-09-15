@@ -47,7 +47,7 @@ module.exports = (robot) ->
   ply = process.env.HUBOT_MARKOV_PLY or 1
   min = process.env.HUBOT_MARKOV_LEARN_MIN or 1
   max = process.env.HUBOT_MARKOV_GENERATE_MAX or 50
-  pct = Number(process.env.HUBOT_MARKOV_RESPOND_CHANCE or 0)
+  pct = 0.01
 
   model = new MarkovModel(storage, ply, min)
 
@@ -66,8 +66,8 @@ module.exports = (robot) ->
         msg.send text
 
     # Respond to mentions of "Sexbot"
-    namefilter = new RegExp(robot.name, "i")
-    if msg.message.text.match(namefilter)
+    namefilter = new RegExp(robot.name + "|" + robot.name.split("bot")[0], "i")
+    if msg.message.text.match(namefilter) and Math.random() < 0.2
       seeds = msg.message.text.split /\s+/
       seeds = seeds.filter (word) -> word isnt robot.name
       seed = seeds[ Math.floor(Math.random() * seeds.length) ];
@@ -75,6 +75,6 @@ module.exports = (robot) ->
         msg.send text
 
   # Generate markov chains on demand, optionally seeded by some initial state.
-  robot.respond /markov(\s+(.+))?$/i, (msg) ->
-    model.generate msg.match[2] or '', max, (text) =>
-      msg.send text
+  #robot.respond /markov(\s+(.+))?$/i, (msg) ->
+  #  model.generate msg.match[2] or '', max, (text) =>
+  #    msg.send text
