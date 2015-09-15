@@ -65,6 +65,14 @@ module.exports = (robot) ->
       model.generate seed[0] or '', max, (text) =>
         msg.send text
 
+    # Respond to mentions of "Sexbot"
+    namefilter = new RegExp(robot.name)
+    if msg.message.text.match(namefilter)
+      seeds = msg.message.text.match /\w+/g
+      seed = seeds[ Math.floor(Math.random() * seeds.length) ];
+      model.generate seed or '', max, (text) =>
+        msg.send text
+
   # Generate markov chains on demand, optionally seeded by some initial state.
   robot.respond /markov(\s+(.+))?$/i, (msg) ->
     model.generate msg.match[2] or '', max, (text) =>
