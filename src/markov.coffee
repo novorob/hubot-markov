@@ -66,7 +66,7 @@ module.exports = (robot) ->
         msg.send text
 
     # Respond to mentions of "Sexbot"
-    namefilter = new RegExp(robot.name)
+    namefilter = new RegExp(robot.name, "i")
     if msg.message.text.match(namefilter)
       seeds = msg.message.text.split /\s+/
       seeds = seeds.filter (word) -> word isnt robot.name
