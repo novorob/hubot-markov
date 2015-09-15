@@ -68,7 +68,7 @@ module.exports = (robot) ->
     # Respond to mentions of "Sexbot"
     namefilter = new RegExp(robot.name)
     if msg.message.text.match(namefilter)
-      seeds = msg.message.text.match /\w+/g
+      seeds = msg.message.text.split /\s+/
       seed = seeds[ Math.floor(Math.random() * seeds.length) ];
       model.generate seed or '', max, (text) =>
         msg.send text
