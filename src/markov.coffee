@@ -47,7 +47,7 @@ module.exports = (robot) ->
   ply = process.env.HUBOT_MARKOV_PLY or 1
   min = process.env.HUBOT_MARKOV_LEARN_MIN or 1
   max = process.env.HUBOT_MARKOV_GENERATE_MAX or 50
-  pct = 0.01
+  pct = 0.02
 
   model = new MarkovModel(storage, ply, min)
 
