@@ -75,7 +75,7 @@ module.exports = (robot) ->
         msg.send text
 
   # Generate markov chains on demand, optionally seeded by some initial state.
-  if msg.message.room == "sexbot"
-    robot.respond /markov(\s+(.+))?$/i, (msg) ->
+  robot.respond /markov(\s+(.+))?$/i, (msg) ->
+    if msg.message.room == "sexbot-sexbot"
       model.generate msg.match[2] or '', max, (text) =>
         msg.send text
