@@ -47,7 +47,7 @@ module.exports = (robot) ->
   ply = process.env.HUBOT_MARKOV_PLY or 1
   min = process.env.HUBOT_MARKOV_LEARN_MIN or 1
   max = process.env.HUBOT_MARKOV_GENERATE_MAX or 50
-  pct = 0.02
+  pct = 0.05
 
   model = new MarkovModel(storage, ply, min)
 
@@ -67,7 +67,7 @@ module.exports = (robot) ->
 
     # Respond to mentions of "Sexbot"
     namefilter = new RegExp(robot.name + "|" + robot.name.split("bot")[0], "i")
-    if msg.message.text.match(namefilter) and Math.random() < 0.2
+    if msg.message.text.match(namefilter) and Math.random() < 0.0
       seeds = msg.message.text.split /\s+/
       seeds = seeds.filter (word) -> word isnt robot.name
       seed = seeds[ Math.floor(Math.random() * seeds.length) ];
